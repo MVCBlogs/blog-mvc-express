@@ -1,5 +1,8 @@
+import Post from "../models/Post";
+
 export default class PostController {
-  public static list(req: any, res: any) {
-    res.render("post/list");
+  public static async list(req: any, res: any) {
+    const posts = await Post.findAll();
+    res.render("post/list", {posts: posts});
   }
 }

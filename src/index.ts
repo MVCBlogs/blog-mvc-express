@@ -3,6 +3,7 @@ import expressEjsLayouts from "express-ejs-layouts";
 import path from "path";
 import HomeController from './controllers/HomeController';
 import PostController from './controllers/PostController';
+import { sequelize, initializeSequelize } from './db/sequelize';
 
 const port = 8000;
 const app = express();
@@ -11,6 +12,7 @@ app.use(expressEjsLayouts);
 app.set('layout', 'layouts/master');
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine","ejs");
+initializeSequelize(sequelize);
 
 // Routes
 app.get("/", HomeController.index);
