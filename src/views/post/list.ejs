@@ -5,8 +5,8 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       <h1>Latest Posts</h1>
       <ul>
-      <% for (var i=0; i<posts.length; i++) { %>
-        <li><%= posts[i].getTitle() %> - <%= posts[i].getCreatedAt() %></li>
+      <% for (var i=0; i<data.posts.length; i++) { %>
+        <li><%= data.posts[i].getTitle() %> - <%= data.posts[i].getCreatedAt() %></li>
       <% } %>
       </ul>
     </div>
