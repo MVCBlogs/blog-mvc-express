@@ -8,4 +8,9 @@ export default class PostController {
     data["posts"] = await Post.findAll();
     res.render("post/list", {data: data});
   }
+
+
+  public static async save(req: any, res: any) {
+    
+  }
 }
