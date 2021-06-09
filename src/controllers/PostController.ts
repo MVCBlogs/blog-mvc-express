@@ -13,4 +13,8 @@ export default class PostController {
   public static async save(req: any, res: any) {
     
   }
+
+  public static async saveComment(req: any, res: any) {
+    
+  }
 }
