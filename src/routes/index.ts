@@ -7,5 +7,6 @@ const router = express.Router();
 router.get("/", HomeController.index);
 router.get("/about", HomeController.about);
 router.get("/posts", PostController.list);
+router.get("/posts/:postId", PostController.show);
 
 export default router;

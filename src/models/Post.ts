@@ -15,8 +15,16 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
+  public getId(): number{
+    return this.id;
+  }
+
   public getTitle(): string{
     return this.title;
+  }
+
+  public getDescription(): string | null{
+    return this.description;
   }
 
   public getCreatedAt(): Date{

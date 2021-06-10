@@ -9,6 +9,9 @@ export default class PostController {
     res.render("post/list", {data: data});
   }
 
+  public static async show(req: any, res: any) {
+    
+  }
 
   public static async save(req: any, res: any) {
     
