@@ -11,6 +11,8 @@ app.use(expressEjsLayouts);
 app.set('layout', 'layouts/master');
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine","ejs");
+app.use(express.json());
+app.use(express.urlencoded());
 initializeSequelize(sequelize);
 
 app.use('/', router);

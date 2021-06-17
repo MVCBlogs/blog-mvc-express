@@ -19,15 +19,31 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
     return this.id;
   }
 
+  public setId(id: number){
+    this.id = id;
+  }
+
   public getTitle(): string{
     return this.title;
+  }
+
+  public setTitle(title: string){
+    this.title = title;
   }
 
   public getDescription(): string | null{
     return this.description;
   }
 
+  public setDescription(description: string){
+    this.description = description;
+  }
+
   public getCreatedAt(): Date{
+    return this.createdAt;
+  }
+
+  public getUpdatedAt(): Date{
     return this.createdAt;
   }
 
@@ -42,10 +58,12 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
         title: {
           type: new DataTypes.STRING(128),
           allowNull: false,
+          validate: {notEmpty: true},
         },
         description: {
           type: new DataTypes.STRING(128),
-          allowNull: true,
+          allowNull: false,
+          validate: {notEmpty: true},
         },
       },
       {

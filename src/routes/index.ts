@@ -8,5 +8,6 @@ router.get("/", HomeController.index);
 router.get("/about", HomeController.about);
 router.get("/posts", PostController.list);
 router.get("/posts/:postId", PostController.show);
+router.post("/posts/save", PostController.save);
 
 export default router;
