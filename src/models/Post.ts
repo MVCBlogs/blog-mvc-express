@@ -3,7 +3,7 @@ import { Model, Optional, DataTypes } from "sequelize";
 interface PostAttributes {
   id: number;
   title: string;
-  description: string | null;
+  description: string;
 }
 
 interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
@@ -11,7 +11,7 @@ interface PostCreationAttributes extends Optional<PostAttributes, "id"> {}
 export default class Post extends Model<PostAttributes, PostCreationAttributes> implements PostAttributes {
   public id!: number;
   public title!: string;
-  public description!: string | null;
+  public description!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -31,7 +31,7 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
     this.title = title;
   }
 
-  public getDescription(): string | null{
+  public getDescription(): string{
     return this.description;
   }
 
