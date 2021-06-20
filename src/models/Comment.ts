@@ -64,6 +64,7 @@ export default class Comment extends Model<CommentAttributes, CommentCreationAtt
         post_id: {
           type: DataTypes.INTEGER.UNSIGNED,
           allowNull: false,
+          validate: {notEmpty: true},
           references: {
             model: Post, 
             key: 'id',

@@ -46,6 +46,11 @@
         </div>
         <div class="card-body">
           <form method="POST" action="/posts/saveComment">
+            <% if (data.messageError) { %>
+            <ul class="errors">
+              <li><%= data.messageError %></li>
+            </ul>
+            <% } %>
             <div class="form-group">
               <label>Comment message:</label>
               <textarea class="form-control" name="message" rows="3" placeholder="Enter message"></textarea>

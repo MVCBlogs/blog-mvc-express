@@ -28,6 +28,11 @@
         </div>
         <div class="card-body">
           <form method="POST" action="/posts/save">
+            <% if (data.messageError) { %>
+            <ul class="errors">
+              <li><%= data.messageError %></li>
+            </ul>
+            <% } %>
             <div class="form-group">
               <label>Post title:</label>
               <input type="text" name="title" class="form-control" placeholder="Enter title">

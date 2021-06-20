@@ -7,6 +7,10 @@ export default class PostController {
     data["title"] = "Posts";
     data["description"] = "List of posts";
     data["posts"] = await Post.findAll();
+    if(req.session.error){
+      data["messageError"] = req.session.error;
+      req.session.error = null;
+    }
     res.render("post/list", {data: data});
   }
 
@@ -21,6 +25,10 @@ export default class PostController {
       data["title"] = post.getTitle();
       data["description"] = post.getDescription();
       data["post"] = post;
+      if(req.session.error){
+        data["messageError"] = req.session.error;
+        req.session.error = null;
+      }
       res.render("post/show", { data: data });
     }else{
       res.redirect('/posts');
@@ -33,7 +41,7 @@ export default class PostController {
       res.redirect('/posts');
     }
     catch (e) {
-      console.error('Captured validation error: ', e.errors[0].message);
+      req.session.error = e.errors[0].message;
       res.redirect('/posts');
     }
   }
@@ -44,8 +52,8 @@ export default class PostController {
       res.redirect('/posts/'+req.body.post_id);
     }
     catch (e) {
-      console.error('Captured validation error: ', e.errors[0].message);
-      res.redirect('/posts'+req.body.post_id);
+      req.session.error = e.errors[0].message;
+      res.redirect('/posts/'+req.body.post_id);
     }
   }
 
