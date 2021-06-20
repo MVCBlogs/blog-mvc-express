@@ -13,6 +13,7 @@ export const sequelize = new Sequelize(db, username, password, {
 
 Post.initializeModel(sequelize);
 Comment.initializeModel(sequelize);
+Post.initializeAssociations();
 
 export async function initializeSequelize(sequelize:any){
   await sequelize.sync();

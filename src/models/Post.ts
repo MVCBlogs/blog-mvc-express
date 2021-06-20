@@ -1,4 +1,5 @@
-import { Model, Optional, DataTypes } from "sequelize";
+import { Model, Optional, DataTypes, Association } from "sequelize";
+import Comment from "./Comment";
 
 interface PostAttributes {
   id: number;
@@ -12,6 +13,7 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
   public id!: number;
   public title!: string;
   public description!: string;
+  public readonly comments?: Comment[];
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -47,6 +49,14 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
     return this.createdAt;
   }
 
+  public getComments(): Comment[] | undefined {
+    return this.comments;
+  }
+
+  public static associations: {
+    comments: Association<Post, Comment>;
+  };
+
   public static initializeModel(sequelize:any){
     Post.init(
       {
@@ -71,5 +81,13 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
         sequelize, 
       }
     );
+  }
+
+  public static initializeAssociations(){
+    Post.hasMany(Comment, {
+      sourceKey: "id",
+      foreignKey: "post_id",
+      as: "comments",
+    });
   }
 }

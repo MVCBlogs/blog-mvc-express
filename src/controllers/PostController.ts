@@ -1,4 +1,5 @@
 import Post from "../models/Post";
+import Comment from "../models/Comment";
 
 export default class PostController {
   public static async list(req: any, res: any) {
@@ -11,7 +12,11 @@ export default class PostController {
 
   public static async show(req: any, res: any) {
     const data: { [key: string]: any } = {};
-    const post = await Post.findByPk(req.params.postId);
+    const post = await Post.findByPk(req.params.postId, 
+      {
+        include: [Post.associations.comments]
+      }
+    );
     if(post != null){
       data["title"] = post.getTitle();
       data["description"] = post.getDescription();
@@ -34,6 +39,18 @@ export default class PostController {
   }
 
   public static async saveComment(req: any, res: any) {
-    
+    try {
+      await Comment.create({ message: req.body.message, post_id: req.body.post_id});
+      res.redirect('/posts/'+req.body.post_id);
+    }
+    catch (e) {
+      console.error('Captured validation error: ', e.errors[0].message);
+      res.redirect('/posts'+req.body.post_id);
+    }
+  }
+
+  public static async deleteComment(req: any, res: any) {
+    await Comment.destroy({ where: { id: req.params.commentId } });
+    res.redirect('/posts/'+req.body.post_id);
   }
 }
